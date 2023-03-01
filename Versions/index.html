@@ -8,62 +8,89 @@
     made on notepad on my phone!" - Sparkles3421
  -->
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SparklesAPI - Versions</title>
     <style>
-        body{
+        body {
             background-color: #3d3d3d;
-            color:white;
+            color: white;
         }
-        h1{
+
+        h1 {
             text-align: center;
         }
-        #lang{
+
+        #lang {
             position: relative;
             width: 20%;
             left: 40%;
             top: auto;
         }
-        #ty{
-            position: relative;;
+
+        #ty {
+            position: relative;
+            ;
             width: 20%;
             left: 40%;
             top: auto;
         }
-        #typed{
+
+        #typed {
             position: relative;
             left: 25px;
         }
-        #version{
+
+        #version {
             position: relative;
             left: 25px;
         }
-        #ver{
-            position: relative;;
+
+        #ver {
+            position: relative;
+            ;
             width: 20%;
             left: 40%;
             top: auto;
         }
-        #ver.h1{
-            width:50%
+
+        #ver.h1 {
+            width: 50%
         }
     </style>
 </head>
+
 <body onload="create()">
     <script>
-        const versions = {
-            "Arduino":["V1.0"],
-            "NodeJS":["V1.0"],
-            "Javascript":["V1.0"],
-            "Lua":["V1.0"],
-            "Roblox":["V1.0"],
-        }
+        var getDATA = function (url, callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.responseType = 'json';
+            xhr.onload = function () {
+                var status = xhr.status;
+                if (status === 200) {
+                    callback(status, xhr.response);
+                }
+            };
+            xhr.send();
+        };
+        const versions = [null]
+        getDATA('https://sparklesapi.github.io/API/DATA.json',
+            function (err, data) {
+                if (err != 200) {
+                    setTimeout(function () {
+                    location.reload();
+                    },1000)
+                } else {
+                    versions = data.versions
+                }
+            });
         var ty = 'Arduino'
         var ver = 'V1.0'
-        
+
         function getVer(typed) {
             ty = typed;
             document.getElementById("version").innerHTML = '';
@@ -78,19 +105,19 @@
             ver = even.target.value
         }
         function changedlang(even) {
-            if(even.target.value == "Arduino(.ino)"){
+            if (even.target.value == "Arduino(.ino)") {
                 getVer("Arduino")
             }
-            if(even.target.value == "NodeJS(.js)"){
+            if (even.target.value == "NodeJS(.js)") {
                 getVer("NodeJS")
             }
-            if(even.target.value == "Javascript(.js)"){
+            if (even.target.value == "Javascript(.js)") {
                 getVer("Javascript")
             }
-            if(even.target.value == "Lua(.lua)"){
+            if (even.target.value == "Lua(.lua)") {
                 getVer("Lua")
             }
-            if(even.target.value == "Roblox(.luau)"){
+            if (even.target.value == "Roblox(.luau)") {
                 getVer("Roblox")
             }
         }
@@ -98,21 +125,23 @@
             getVer("Arduino")
         }
         function Version() {
-            location.href = "https://github.com/SparklesAPI/SparklesAPI/tree/main/Versions/"+ty+"/"+ver
+            location.href = "https://github.com/SparklesAPI/SparklesAPI/tree/main/Versions/" + ty + "/" + ver
         }
     </script>
     <h1>Versions</h1>
     <br>
     <div id="lang">
         <p>
-        <select id="language" onchange="changedlang(event)">
-            <option>Arduino(.ino)</option>
-            <option>NodeJS(.js)</option>
-            <option>Javascript(.js)</option>
-            <option>Lua(.lua)</option>
-            <option>Roblox(.luau)</option>
-            <!-- <option>Arduino</option> -->
-        </select><span style="color:red;font-weight:1000;font-size:x-large;position:relative;top:-25px;left:125px;"> *</span></p>
+            <select id="language" onchange="changedlang(event)">
+                <option>Arduino(.ino)</option>
+                <option>NodeJS(.js)</option>
+                <option>Javascript(.js)</option>
+                <option>Lua(.lua)</option>
+                <option>Roblox(.luau)</option>
+                <!-- <option>Arduino</option> -->
+            </select><span style="color:red;font-weight:1000;font-size:x-large;position:relative;top:-25px;left:125px;">
+                *</span>
+        </p>
     </div>
     <hr>
     <div id="ty">
@@ -130,4 +159,5 @@
     </div>
     <button onclick="Version()">Get Version</button>
 </body>
+
 </html>
