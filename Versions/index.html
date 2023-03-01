@@ -1,0 +1,135 @@
+<!DOCtype html>
+<!-- 
+
+    SparklesAPI
+
+    "Please be respectful of this work, I mainly work on the api
+    not web pages. I hand make every single web page. This one was
+    made on notepad on my phone!" - Sparkles3421
+ -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SparklesAPI - Versions</title>
+    <style>
+        body{
+            background-color: #3d3d3d;
+            color:white;
+        }
+        h1{
+            text-align: center;
+        }
+        #lang{
+            position: relative;
+            width: 20%;
+            left: 40%;
+            top: auto;
+        }
+        #ty{
+            position: relative;;
+            width: 20%;
+            left: 40%;
+            top: auto;
+        }
+        #typed{
+            position: relative;
+            left: 25px;
+        }
+        #version{
+            position: relative;
+            left: 25px;
+        }
+        #ver{
+            position: relative;;
+            width: 20%;
+            left: 40%;
+            top: auto;
+        }
+        #ver.h1{
+            width:50%
+        }
+    </style>
+</head>
+<body onload="create()">
+    <script>
+        const versions = {
+            "Arduino":["V1.0"],
+            "NodeJS":["V1.0"],
+            "Javascript":["V1.0"],
+            "Lua":["V1.0"],
+            "Roblox":["V1.0"],
+        }
+        var ty = 'Arduino'
+        var ver = 'V1.0'
+        
+
+
+        function getVer(typed) {
+            ty = typed;
+            document.getElementById("version").innerHTML = '';
+            for (let i = 0; i < versions[typed].length; i++) {
+                const elem = document.createElement('option');
+                elem.innerHTML = versions[typed][i];
+                document.getElementById('version').appendChild(elem);
+            }
+        }
+        function changedVer(even) {
+            console.log('changed to: ' + even.target.value);
+            ver = even.target.value
+        }
+        function changedlang(even) {
+            if(even.target.value == "Arduino(.ino)"){
+                getVer("Arduino")
+            }
+            if(even.target.value == "NodeJS(.js)"){
+                getVer("NodeJS")
+            }
+            if(even.target.value == "Javascript(.js)"){
+                getVer("Javascript")
+            }
+            if(even.target.value == "Lua(.lua)"){
+                getVer("Lua")
+            }
+            if(even.target.value == "Roblox(.luau)"){
+                getVer("Roblox")
+            }
+        }
+        function create() {
+            getVer("Arduino")
+        }
+        function Version() {
+            location.href = "https://github.com/SparklesAPI/SparklesAPI/Versions/"+ty+"/"+ver
+        }
+    </script>
+    <h1>Versions</h1>
+    <br>
+    <div id="lang">
+        <p>
+        <select id="language" onchange="changedlang(event)">
+            <option>Arduino(.ino)</option>
+            <option>NodeJS(.js)</option>
+            <option>Javascript(.js)</option>
+            <option>Lua(.lua)</option>
+            <option>Roblox(.luau)</option>
+            <!-- <option>Arduino</option> -->
+        </select><span style="color:red;font-weight:1000;font-size:x-large;position:relative;top:-25px;left:125px;"> *</span></p>
+    </div>
+    <hr>
+    <div id="ty">
+        <h1>API type</h1>
+        <select id="type">
+            <option>Online</option>
+            <option>Offline</option>
+        </select>
+    </div>
+    <hr>
+    <div id="ver">
+        <h1>Version</h1>
+        <select onchange="changedVer(event)" id="version">
+        </select><span style="color:red;font-weight:1000;font-size:x-large;position:relative;left:50px;"> *</span></p>
+    </div>
+    <button onclick="Version()">Get Version</button>
+</body>
+</html>
